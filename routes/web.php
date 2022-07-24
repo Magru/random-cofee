@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +29,9 @@ Route::middleware([
     })->name('dashboard');
 
     Route::get('/user/index', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+    Route::get('/user/store', [UserController::class, 'store'])->name('user.store');
+
+    Route::get('/community/index', [CommunityController::class, 'index'])->name('community.index');
+
 });

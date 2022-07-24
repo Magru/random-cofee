@@ -5,32 +5,32 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <div class="overflow-x-auto">
-                    <table class="table w-full">
-                        <!-- head -->
-                        <thead>
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-4">
+        <a href="{{ route('user.create') }}" class="btn btn-outline btn-primary">New</a>
+    </div>
+
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+            <div class="overflow-x-auto">
+                <table class="table w-full">
+                    <!-- head -->
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Role</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($users as $_user)
                         <tr>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
+                            <th>{{ $_user->id }}</th>
+                            <td>{{ $_user->name }}</td>
+                            <td>{{ $_user->getRoleNames() }}</td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($users as $_user)
-                            <tr>
-                                <th>{{ $_user->id }}</th>
-                                <td>{{ $_user->name }}</td>
-                                <td>Quality Control Specialist</td>
-                                <td>Blue</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

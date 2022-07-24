@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Community;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -12,30 +13,35 @@ class UserController extends Controller
     {
         $users = User::all();
 
+
         return view('users.index', [
             'users' => $users
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+
+        $community = Community::all();
+
+        return view('users.create', [
+            'communities' => $community
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->name = $request->get('name');
+        $user->email = null;
+        $user->password = null;
+        $user->save();
+
+        $community = Community::find($request->get('community'));
+        $user->communities()->attach($community);
+
+        return redirect()->route('user.index');
     }
 
     /**
