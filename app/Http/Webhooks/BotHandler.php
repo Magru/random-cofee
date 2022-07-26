@@ -11,7 +11,7 @@ class BotHandler extends WebhookHandler
 {
     public function start(): void
     {
-        if(!User::where('chat_id', $this->chat->chat_id)->exist()){
+        if(!User::where('chat_id', $this->chat->chat_id)->exists()){
             $user = new User;
             $user->chat_id = $this->chat->chat_id;
             $user->name = 'User Name';
