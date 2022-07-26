@@ -13,6 +13,6 @@ class BotHandler extends WebhookHandler
         $chat_id = $this->chat->chat_id;
         $bot = TelegraphBot::fromId(1);
 
-        $this->chat->markdown('Chat ID: ' . $chat_id . 'Bot ID: ' . print_r($bot->info(), true))->send();
+        $this->chat->markdown('Hello')->send();
     }
 }
