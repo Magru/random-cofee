@@ -2,6 +2,7 @@
 
 namespace App\Http\Webhooks;
 
+use App\Models\User;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
 use DefStudio\Telegraph\Models\TelegraphBot;
 use DefStudio\Telegraph\Models\TelegraphChat;
@@ -10,9 +11,20 @@ class BotHandler extends WebhookHandler
 {
     public function start(): void
     {
-        $chat_id = $this->chat->chat_id;
-        $bot = TelegraphBot::fromId(1);
+        if(!User::where('chat_id', $this->chat->chat_id)->exist()){
+            $user = new User;
+            $user->chat_id = $this->chat->chat_id;
+            $user->name = 'User Name';
+            $user->email = null;
+            $user->password = null;
+            $user->save();
 
-        $this->chat->markdown('Hello ' . $chat_id)->send();
+            $user->assignRole('tg_user');
+
+
+            $this->chat->markdown('Hello new user')->send();
+        }
+
+
     }
 }
