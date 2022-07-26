@@ -11,26 +11,8 @@
 
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-            <div class="overflow-x-auto">
-                <table class="table w-full">
-                    <!-- head -->
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Role</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($users as $_user)
-                        <tr>
-                            <th>{{ $_user->id }}</th>
-                            <td>{{ $_user->name }}</td>
-                            <td>{{ $_user->getRoleNames() }}</td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+            <div class="overflow-x-auto px-3 py-3">
+                <livewire:user-table />
             </div>
         </div>
     </div>
