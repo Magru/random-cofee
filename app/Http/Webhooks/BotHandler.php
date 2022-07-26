@@ -4,6 +4,8 @@ namespace App\Http\Webhooks;
 
 use App\Models\User;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
+use DefStudio\Telegraph\Keyboard\Button;
+use DefStudio\Telegraph\Keyboard\Keyboard;
 use DefStudio\Telegraph\Models\TelegraphBot;
 use DefStudio\Telegraph\Models\TelegraphChat;
 
@@ -20,11 +22,12 @@ class BotHandler extends WebhookHandler
             $user->save();
 
             $user->assignRole('tg_user');
-
-
-            $this->chat->markdown('Hello new user')->send();
         }
 
+
+        $this->chat->message('Hello new user')->keyboard(Keyboard::make()->buttons([
+            Button::make('Начнем ?')->action('delete')->param('id', '42'),
+        ]))->send();
 
     }
 }
