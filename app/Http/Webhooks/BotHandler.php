@@ -30,4 +30,8 @@ class BotHandler extends WebhookHandler
         ]))->send();
 
     }
+
+    public function delete(): void{
+        Telegraph::message('Delete press')->send();
+    }
 }
