@@ -26,14 +26,14 @@ class BotHandler extends WebhookHandler
 
 
         $this->chat->message('Hello new user')->keyboard(Keyboard::make()->buttons([
-            Button::make('Начнем ?')->action('bibaboba')->param('id', '42'),
+            Button::make('Начнем ?')->action('/bibaboba')->param('id', '42'),
             Button::make('URL')->url('https://test.it'),
         ]))->send();
 
     }
 
     public function bibaboba(){
-        $this->chat->markdown("*Hi* happy to be here!")->send();
+        $this->chat->reply('ssd');
     }
 
 }
