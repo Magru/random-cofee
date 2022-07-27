@@ -33,7 +33,9 @@ class BotHandler extends WebhookHandler
     }
 
     public function bibaboba(){
-        $this->chat->message('Delete press')->send();
+        $this->chat->message('Hello new user')->keyboard(Keyboard::make()->buttons([
+            Button::make('URL')->url('https://test.it'),
+        ]))->send();
     }
 
 }
