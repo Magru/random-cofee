@@ -32,9 +32,9 @@ class BotHandler extends WebhookHandler
 
     }
 
-    public function delete(): void{
+    public function delete(){
         //$this->chat->message('Delete press')->send();
-        $this->chat->reply("Notification dismissed")->send();
+        $this->reply("Notification dismissed")->send();
     }
 
 }
