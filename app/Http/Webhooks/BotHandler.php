@@ -27,11 +27,12 @@ class BotHandler extends WebhookHandler
 
         $this->chat->message('Hello new user')->keyboard(Keyboard::make()->buttons([
             Button::make('Начнем ?')->action('delete')->param('id', '42'),
+            Button::make('URL')->url('https://test.it'),
         ]))->send();
 
     }
 
     public function delete(): void{
-        Telegraph::message('Delete press')->send();
+        $this->chat->message('Delete press')->send();
     }
 }
