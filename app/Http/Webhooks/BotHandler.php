@@ -33,9 +33,7 @@ class BotHandler extends WebhookHandler
     }
 
     public function bibaboba(){
-        $this->chat->message('Hello new user')->keyboard(Keyboard::make()->buttons([
-            Button::make('URL')->url('https://test.it'),
-        ]))->send();
+        $this->chat->markdown("*Hi* happy to be here!")->send();
     }
 
 }
