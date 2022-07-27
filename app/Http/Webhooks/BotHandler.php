@@ -10,6 +10,7 @@ use DefStudio\Telegraph\Keyboard\ReplyButton;
 use DefStudio\Telegraph\Keyboard\ReplyKeyboard;
 use DefStudio\Telegraph\Models\TelegraphBot;
 use DefStudio\Telegraph\Models\TelegraphChat;
+use DefStudio\Telegraph\Telegraph;
 
 class BotHandler extends WebhookHandler
 {
@@ -27,10 +28,13 @@ class BotHandler extends WebhookHandler
         }
 
 
-        $this->chat->message('Hello new user')->keyboard(ReplyKeyboard::make()->buttons([
-            ReplyButton::make('foo')->requestPoll(),
-            ReplyButton::make('bar')->requestQuiz(),
-        ]))->send();
+        $this->chat->message('hello world')
+            ->keyboard(ReplyKeyboard::make()
+                ->buttons([
+                    ReplyButton::make('foo')->requestPoll(),
+                    ReplyButton::make('bar')->requestQuiz(),
+                    ReplyButton::make('baz')->webApp('https://webapp.dev'),
+                ]))->send();
 
     }
 
