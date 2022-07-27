@@ -6,6 +6,7 @@ use App\Models\User;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
+use DefStudio\Telegraph\Keyboard\ReplyButton;
 use DefStudio\Telegraph\Models\TelegraphBot;
 use DefStudio\Telegraph\Models\TelegraphChat;
 
@@ -28,6 +29,8 @@ class BotHandler extends WebhookHandler
         $this->chat->message('Hello new user')->keyboard(Keyboard::make()->buttons([
             Button::make('Начнем ?')->action('/bibaboba')->param('id', '42'),
             Button::make('URL')->url('https://test.it'),
+            ReplyButton::make('foo')->requestPoll(),
+            ReplyButton::make('bar')->requestQuiz(),
         ]))->send();
 
     }
