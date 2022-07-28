@@ -21,7 +21,7 @@ class BotHandler extends WebhookHandler
             ]))->send();
     }
 
-    public function dismiss(){
+    public function register(){
 
         Log::debug('register action');
 
