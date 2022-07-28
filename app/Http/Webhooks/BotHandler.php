@@ -18,12 +18,8 @@ class BotHandler extends WebhookHandler
 {
     public function start(): void
     {
-        $this->chat->message('hello world')
-            ->keyboard(Keyboard::make()->buttons([
-                Button::make('Delete')->action('delete')->param('id', '42'),
-                Button::make('open')->url('https://test.it'),
-                Button::make('Web App')->webApp('https://web-app.test.it'),
-            ]))->send();
+        $response = Telegram::getWebhookDebugInfo()->send();
+        Log::info($response);
     }
 
     public function delete(){
