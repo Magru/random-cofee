@@ -28,17 +28,18 @@ class BotHandler extends WebhookHandler
         }
 
 
+
         $this->chat->message('hello world')
-            ->replyKeyboard(ReplyKeyboard::make()
-                ->buttons([
-                    ReplyButton::make('foo')->requestPoll(),
-                    ReplyButton::make('bar')->requestQuiz(),
-                    ReplyButton::make('baz')->webApp('https://webapp.dev'),
-                ]))->send();
+            ->keyboard(function(Keyboard $keyboard){
+                return $keyboard
+                    ->button('Delete')->action('test')->param('id', '42')
+                    ->button('open')->url('https://test.it')
+                    ->button('Web App')->webApp('https://web-app.test.it');
+            })->send();
 
     }
 
-    public function bibaboba(){
+    public function test(){
         $this->chat->reply('ssd');
     }
 
