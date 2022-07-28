@@ -6,6 +6,7 @@ use App\Models\User;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
+use DefStudio\Telegraph\Models\TelegraphChat;
 use Illuminate\Support\Facades\Log;
 
 
@@ -25,8 +26,10 @@ class BotHandler extends WebhookHandler
 
         Log::debug('register action');
 
-        $notificationId = $this->callbackQuery->data()->get('notification-id'); //42
-        Log::debug($notificationId);
+        $chat = TelegraphChat::find(41364458254);
+        $chat->message('hello')->send();
+        $chat->html("<b>hello<b>\n\nI'm a bot!")->send();
+        $chat->markdown('*hello*')->send();
 
     }
 
