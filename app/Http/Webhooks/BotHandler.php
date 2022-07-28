@@ -17,24 +17,26 @@ class BotHandler extends WebhookHandler
 {
     public function start(): void
     {
-        if(!User::where('chat_id', $this->chat->chat_id)->exists()){
-            $user = new User;
-            $user->chat_id = $this->chat->chat_id;
-            $user->name = 'User Name';
-            $user->email = null;
-            $user->password = null;
-            $user->save();
+//        if(!User::where('chat_id', $this->chat->chat_id)->exists()){
+//            $user = new User;
+//            $user->chat_id = $this->chat->chat_id;
+//            $user->name = 'User Name';
+//            $user->email = null;
+//            $user->password = null;
+//            $user->save();
+//
+//            $user->assignRole('tg_user');
+//        }
 
-            $user->assignRole('tg_user');
-        }
 
 
-
-        $this->chat->message('hello world')
-            ->keyboard(function(Keyboard $keyboard){
-                return $keyboard
-                    ->button('Custom action')->action('register')->param('id', '42');
-            })->send();
+        Telegraph::message('hello world')
+            ->keyboard(ReplyKeyboard::make()
+                ->buttons([
+                    ReplyButton::make('foo')->requestPoll(),
+                    ReplyButton::make('bar')->requestQuiz(),
+                    ReplyButton::make('baz')->webApp('https://webapp.dev'),
+                ]))->send();
 
     }
 
