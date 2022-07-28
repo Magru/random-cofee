@@ -22,6 +22,8 @@ class BotHandler extends WebhookHandler
 {
     public function start(): void
     {
+        Log::info('start');
+
         $this->chat->message('hello world')
             ->keyboard(Keyboard::make()->buttons([
                 Button::make('Delete')->action('handleInlineQuery')->param('id', '42'),
