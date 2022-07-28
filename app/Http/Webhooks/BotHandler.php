@@ -40,6 +40,7 @@ class BotHandler extends WebhookHandler
 
     public function register(): void{
 
+        $this->reply("Notification dismissed")->send();
         $key1 = $this->data->get('id');
         $chat = TelegraphChat::find(136445825);
         $chat->html("<b>hello<b>\n\nI'm a bot!" . $key1)->send();
