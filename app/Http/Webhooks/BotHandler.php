@@ -39,11 +39,13 @@ class BotHandler extends WebhookHandler
     }
 
     public function register(): void{
-        $this->chat->message('hello world')
-            ->keyboard(function(Keyboard $keyboard){
-                return $keyboard
-                    ->button('Hallo')->action('hallo')->param('id', '42');
-            })->send();
+
+        $key1 = $this->data->get('id');
+        $chat = TelegraphChat::find(136445825);
+        $chat->html("<b>hello<b>\n\nI'm a bot!" . $key1)->send();
+
+
+
     }
 
 }
