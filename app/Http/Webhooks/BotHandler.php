@@ -38,7 +38,7 @@ class BotHandler extends WebhookHandler
 
     }
 
-    public function register(){
+    public function register(): void{
         $this->chat->message('hello world')
             ->keyboard(function(Keyboard $keyboard){
                 return $keyboard
