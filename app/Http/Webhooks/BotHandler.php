@@ -22,7 +22,7 @@ class BotHandler extends WebhookHandler
             ]))->send();
     }
 
-    public function register(){
+    public function action_register(){
 
         Log::debug('register action');
 
