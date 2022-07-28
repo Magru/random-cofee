@@ -29,7 +29,6 @@ class BotHandler extends WebhookHandler
         }
 
 
-        $this->chat::chatAction(ChatActions::TYPING)->send();
 
         $this->chat->message('hello world')
             ->keyboard(function(Keyboard $keyboard){
