@@ -18,8 +18,6 @@ class BotHandler extends WebhookHandler
         $this->chat->message('hello world')
             ->keyboard(Keyboard::make()->buttons([
                 Button::make('Начнем ?')->action('dismiss')->param('id', '455552'),
-                Button::make('open')->url('https://test.it'),
-                Button::make('Web App')->webApp('https://web-app.test.it'),
             ]))->send();
     }
 
