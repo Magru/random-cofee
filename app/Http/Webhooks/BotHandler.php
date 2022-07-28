@@ -3,6 +3,7 @@
 namespace App\Http\Webhooks;
 
 use App\Models\User;
+use DefStudio\Telegraph\Enums\ChatActions;
 use DefStudio\Telegraph\Handlers\WebhookHandler;
 use DefStudio\Telegraph\Keyboard\Button;
 use DefStudio\Telegraph\Keyboard\Keyboard;
@@ -28,11 +29,12 @@ class BotHandler extends WebhookHandler
         }
 
 
+        $this->chat::chatAction(ChatActions::TYPING)->send();
 
         $this->chat->message('hello world')
             ->keyboard(function(Keyboard $keyboard){
                 return $keyboard
-                    ->button('Delete')->action('/test')->param('id', '42')
+                    ->button('Delete')->action('test')->param('id', '42')
                     ->button('open')->url('https://test.it')
                     ->button('Web App')->webApp('https://web-app.test.it');
             })->send();
@@ -40,7 +42,7 @@ class BotHandler extends WebhookHandler
     }
 
     public function test(){
-        $this->chat->reply('ssd');
+        Telegraph::message('hello world')->send();
     }
 
 }
