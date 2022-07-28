@@ -33,7 +33,7 @@ class BotHandler extends WebhookHandler
         $this->chat->message('hello world')
             ->keyboard(function(Keyboard $keyboard){
                 return $keyboard
-                    ->button('Delete')->action('register')->param('id', '42');
+                    ->button('Custom action')->action('register')->param('id', '42');
             })->send();
 
     }
