@@ -12,32 +12,23 @@ use DefStudio\Telegraph\Keyboard\ReplyKeyboard;
 use DefStudio\Telegraph\Models\TelegraphBot;
 use DefStudio\Telegraph\Models\TelegraphChat;
 use DefStudio\Telegraph\Telegraph;
+use Illuminate\Support\Facades\Log;
 
 class BotHandler extends WebhookHandler
 {
     public function start(): void
     {
-//        if(!User::where('chat_id', $this->chat->chat_id)->exists()){
-//            $user = new User;
-//            $user->chat_id = $this->chat->chat_id;
-//            $user->name = 'User Name';
-//            $user->email = null;
-//            $user->password = null;
-//            $user->save();
-//
-//            $user->assignRole('tg_user');
-//        }
-
-
-
-        $keyboard = ReplyKeyboard::make()
-        ->button('Send Contact')->requestContact()
-        ->button('Send Location')->requestLocation()
-        ->oneTime();
-
-
         $this->chat->message('hello world')
-            ->replyKeyboard($keyboard)->send();
+            ->keyboard(Keyboard::make()->buttons([
+                Button::make('Delete')->action('delete')->param('id', '42'),
+                Button::make('open')->url('https://test.it'),
+                Button::make('Web App')->webApp('https://web-app.test.it'),
+            ]))->send();
+    }
+
+    public function delete(){
+        Log::info('delete action');
+
     }
 
 
