@@ -17,14 +17,16 @@ class BotHandler extends WebhookHandler
 
         $this->chat->message('hello world')
             ->keyboard(Keyboard::make()->buttons([
-                Button::make('Начнем ?')->action('dismiss')->param('id', '455552'),
+                Button::make('Начнем ?')->action('register')->param('notification-id', '455552'),
             ]))->send();
     }
 
     public function dismiss(){
 
-        $key1 = $this->data->get('id');
-        Log::debug($key1);
+        Log::debug('register action');
+
+        $notificationId = $this->callbackQuery->data()->get('notification-id'); //42
+        Log::debug($notificationId);
 
     }
 
