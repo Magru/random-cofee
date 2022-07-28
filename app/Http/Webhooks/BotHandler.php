@@ -28,7 +28,7 @@ class BotHandler extends WebhookHandler
         }
 
 
-        $this->chat->message('hello world')
+        Telegraph::message('hello world')
             ->keyboard(ReplyKeyboard::make()
                 ->buttons([
                     ReplyButton::make('foo')->requestPoll(),
