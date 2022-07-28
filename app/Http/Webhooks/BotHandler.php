@@ -22,7 +22,7 @@ class BotHandler extends WebhookHandler
 {
     public function start(): void
     {
-        Log::info('start');
+        Log::debug('start action');
 
         $this->chat->message('hello world')
             ->keyboard(Keyboard::make()->buttons([
@@ -31,20 +31,5 @@ class BotHandler extends WebhookHandler
                 Button::make('Web App')->webApp('https://web-app.test.it'),
             ]))->send();
     }
-
-        public function handleInlineQuery(InlineQuery $inlineQuery): void
-    {
-        $query = $inlineQuery->query(); // "pest logo"
-
-        $logo = 'aaa'; // the code to handle the query. just an example here
-
-        $this->bot->answerInlineQuery($inlineQuery->id(), [
-            InlineQueryResultPhoto::make($logo."-light", "https://logofinder.dev/$logo/light.jpg", "https://logofinder.dev/$logo/light/thumb.jpg")
-                ->caption('Light Logo'),
-            InlineQueryResultPhoto::make($logo."-dark", "https://logofinder.dev/$logo->id/dark.jpg", "https://logofinder.dev/$logo/dark/thumb.jpg")
-                ->caption('Light Logo'),
-        ])->send();
-    }
-
 
 }
