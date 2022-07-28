@@ -29,7 +29,7 @@ class BotHandler extends WebhookHandler
 
 
         $this->chat->message('hello world')
-            ->keyboard(ReplyKeyboard::make()
+            ->replyKeyboard(ReplyKeyboard::make()
                 ->buttons([
                     ReplyButton::make('foo')->requestPoll(),
                     ReplyButton::make('bar')->requestQuiz(),
