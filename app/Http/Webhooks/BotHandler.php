@@ -36,7 +36,7 @@ class BotHandler extends WebhookHandler
         ->oneTime();
 
 
-        Telegraph::message('hello world')
+        $this->chat->message('hello world')
             ->replyKeyboard($keyboard)->send();
     }
 
