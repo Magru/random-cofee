@@ -30,25 +30,15 @@ class BotHandler extends WebhookHandler
 
 
 
+        $keyboard = ReplyKeyboard::make()
+        ->button('Send Contact')->requestContact()
+        ->button('Send Location')->requestLocation()
+        ->oneTime();
+
+
         Telegraph::message('hello world')
-            ->keyboard(ReplyKeyboard::make()
-                ->buttons([
-                    ReplyButton::make('foo')->requestPoll(),
-                    ReplyButton::make('bar')->requestQuiz(),
-                    ReplyButton::make('baz')->webApp('https://webapp.dev'),
-                ]))->send();
-
+            ->replyKeyboard($keyboard)->send();
     }
 
-    public function register(): void{
-
-        $this->reply("Notification dismissed")->send();
-        $key1 = $this->data->get('id');
-        $chat = TelegraphChat::find(136445825);
-        $chat->html("<b>hello<b>\n\nI'm a bot!" . $key1)->send();
-
-
-
-    }
 
 }
