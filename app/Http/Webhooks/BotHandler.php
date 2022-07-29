@@ -22,14 +22,9 @@ class BotHandler extends WebhookHandler
             ]))->send();
     }
 
-    public function action_register(){
+    public function register(){
 
         Log::debug('register action');
-
-        $chat = TelegraphChat::find(41364458254);
-        $chat->message('hello')->send();
-        $chat->html("<b>hello<b>\n\nI'm a bot!")->send();
-        $chat->markdown('*hello*')->send();
 
     }
 
