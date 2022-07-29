@@ -18,7 +18,7 @@ class BotHandler extends WebhookHandler
 
         $this->chat->message('hello world')
             ->keyboard(Keyboard::make()->buttons([
-                Button::make('Начнем ?')->action('/register')->param('notification-id', '455552'),
+                Button::make('Начнем ?')->action('register')->param('notification-id', '455552'),
             ]))->send();
     }
 
