@@ -24,7 +24,9 @@ class BotHandler extends WebhookHandler
 
     public function register(){
 
-        Log::debug('register action');
+        $this->chat->html("<strong>Hello!</strong>\n\nI'm here!")->send();
+
+
 
     }
 
