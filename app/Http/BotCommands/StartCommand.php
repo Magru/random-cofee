@@ -22,6 +22,9 @@ class StartCommand extends Command
      */
     public function handle()
     {
+        Log::debug('webhookHandler handle');
+
+
         // This will send a message using `sendMessage` method behind the scenes to
         // the user/chat id who triggered this command.
         // `replyWith<Message|Photo|Audio|Video|Voice|Document|Sticker|Location|ChatAction>()` all the available methods are dynamically
