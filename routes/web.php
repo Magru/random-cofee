@@ -2,7 +2,11 @@
 
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
+use Telegram\Bot\Api;
+use Telegram\Bot\Traits\Telegram;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +38,10 @@ Route::middleware([
 
     Route::get('/community/index', [CommunityController::class, 'index'])->name('community.index');
 
+});
+
+Route::post('/'.env('TELEGRAM_BOT_TOKEN').'/webhookHandler', function () {
+    $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
+    $response = $telegram->getUpdates();
+    Log::debug(print_r($response, true));
 });
