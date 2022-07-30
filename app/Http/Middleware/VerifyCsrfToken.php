@@ -12,6 +12,6 @@ class VerifyCsrfToken extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'https://random-coffee.app/telegraph/5570824772:AAF7HpOHd-1QgF7EHI7e1C5GO_B6Mgzaapc/webhookHandler'
+        'https://random-coffee.app/5570824772:AAF7HpOHd-1QgF7EHI7e1C5GO_B6Mgzaapc/webhookHandler'
     ];
 }
