@@ -41,7 +41,7 @@ Route::middleware([
 });
 
 Route::post('/'.env('TELEGRAM_BOT_TOKEN').'/webhookHandler', function () {
+    Log::debug('webhookHandler hit');
     $telegram = new Api(env('TELEGRAM_BOT_TOKEN'));
     $response = $telegram->getUpdates();
-    Log::debug(print_r($response, true));
 });
