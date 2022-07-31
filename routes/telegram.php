@@ -43,8 +43,6 @@ class ChooseColorMenu extends InlineMenu
 }
 
 $bot->onCommand('start', function (Nutgram $bot) {
-
     $conv = new ChooseColorMenu();
-
      return $conv->start($bot);
 });
