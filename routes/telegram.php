@@ -17,7 +17,7 @@ use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardButton;
 
 
 
-$bot->onCommand('start', function (Nutgram $bot) {
+$bot->onCommand('example', function (Nutgram $bot) {
 
     $conv = new ChooseColorMenu();
 
