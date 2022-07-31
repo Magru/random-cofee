@@ -1,6 +1,7 @@
 <?php
 /** @var SergiX44\Nutgram\Nutgram $bot */
 
+use Illuminate\Support\Facades\Log;
 use SergiX44\Nutgram\Conversations\InlineMenu;
 use SergiX44\Nutgram\Nutgram;
 use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardButton;
@@ -20,6 +21,8 @@ class ChooseColorMenu extends InlineMenu
 
     public function start(Nutgram $bot)
     {
+        Log::debug('insode');
+
         $this->menuText('Choose a color:')
             ->addButtonRow(InlineKeyboardButton::make('Red', callback_data: 'red@handleColor'))
             ->addButtonRow(InlineKeyboardButton::make('Green', callback_data: 'green@handleColor'))
@@ -43,6 +46,7 @@ class ChooseColorMenu extends InlineMenu
 }
 
 $bot->onCommand('start', function (Nutgram $bot) {
+    Log::debug('start');
     $conv = new ChooseColorMenu();
      return $conv->start($bot);
 });
