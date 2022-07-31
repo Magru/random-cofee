@@ -60,5 +60,3 @@ class AskIceCreamConversation extends Conversation {
 $bot = new Nutgram($_ENV['TELEGRAM_TOKEN']);
 
 $bot->onCommand('start', AskIceCreamConversation::class);
-
-$bot->run();
