@@ -15,6 +15,18 @@ use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardButton;
 |
 */
 
+
+
+$bot->onCommand('start', function (Nutgram $bot) {
+
+    $conv = new ChooseColorMenu();
+
+     return $conv->start($bot);
+
+
+});
+
+
 class ChooseColorMenu extends InlineMenu
 {
 
@@ -41,12 +53,3 @@ class ChooseColorMenu extends InlineMenu
         $this->end();
     }
 }
-
-$bot->onCommand('start', function (Nutgram $bot) {
-
-    $conv = new ChooseColorMenu();
-
-     return $conv->start($bot);
-
-
-});
