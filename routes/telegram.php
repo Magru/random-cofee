@@ -14,5 +14,14 @@ use SergiX44\Nutgram\Nutgram;
 */
 
 $bot->onCommand('start', function (Nutgram $bot) {
-    return $bot->sendMessage('Hello, world!');
+
+
+    return $this->menuText('Choose a color:')
+        ->addButtonRow(InlineKeyboardButton::make('Red', callback_data: 'red@handleColor'))
+        ->addButtonRow(InlineKeyboardButton::make('Green', callback_data: 'green@handleColor'))
+        ->addButtonRow(InlineKeyboardButton::make('Yellow', callback_data: 'yellow@handleColor'))
+        ->orNext('none')
+        ->showMenu();
+
+
 })->description('The start command!');
