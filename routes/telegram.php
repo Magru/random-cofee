@@ -15,5 +15,5 @@ use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardButton;
 */
 
 $bot->onCommand('start', function (Nutgram $bot) {
-    return (new BotTestController())->start($bot);
+    return BotTestController::class;
 });
