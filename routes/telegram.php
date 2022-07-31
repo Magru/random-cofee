@@ -2,6 +2,7 @@
 /** @var SergiX44\Nutgram\Nutgram $bot */
 
 use SergiX44\Nutgram\Nutgram;
+use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardButton;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,7 @@ use SergiX44\Nutgram\Nutgram;
 $bot->onCommand('start', function (Nutgram $bot) {
 
 
-    return $this->menuText('Choose a color:')
+    return $bot->menuText('Choose a color:')
         ->addButtonRow(InlineKeyboardButton::make('Red', callback_data: 'red@handleColor'))
         ->addButtonRow(InlineKeyboardButton::make('Green', callback_data: 'green@handleColor'))
         ->addButtonRow(InlineKeyboardButton::make('Yellow', callback_data: 'yellow@handleColor'))
