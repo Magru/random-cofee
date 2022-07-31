@@ -16,37 +16,49 @@ use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardButton;
 |
 */
 
-class ChooseColorMenu extends InlineMenu
-{
+use SergiX44\Nutgram\Conversations\Conversation;
+use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardMarkup;
 
-    public function start(Nutgram $bot)
+class AskIceCreamConversation extends Conversation {
+
+    protected ?string $step = 'askCupSize';
+
+    public $cupSize;
+
+    public function askCupSize(Nutgram $bot)
     {
-        Log::debug('insode');
-
-        $this->menuText('Choose a color:')
-            ->addButtonRow(InlineKeyboardButton::make('Red', callback_data: 'red@handleColor'))
-            ->addButtonRow(InlineKeyboardButton::make('Green', callback_data: 'green@handleColor'))
-            ->addButtonRow(InlineKeyboardButton::make('Yellow', callback_data: 'yellow@handleColor'))
-            ->orNext('none')
-            ->showMenu();
+        $bot->sendMessage('How big should be you ice cream cup?', [
+            'reply_markup' => InlineKeyboardMarkup::make()
+                ->addRow(InlineKeyboardButton::make('Small', callback_data: 'S'), InlineKeyboardButton::make('Medium', callback_data: 'M'))
+                ->addRow(InlineKeyboardButton::make('Big', callback_data: 'L'), InlineKeyboardButton::make('Super Big', callback_data: 'XL')),
+        ]);
+        $this->next('askFlavors');
     }
 
-    public function handleColor(Nutgram $bot)
+    public function askFlavors(Nutgram $bot)
     {
-        $color = $bot->callbackQuery()->data;
-        $this->menuText("Choosen: $color!")
-            ->showMenu();
+        // if is not a callback query, ask again!
+        if (!$bot->isCallbackQuery()) {
+            $this->askCupSize($bot);
+            return;
+        }
+
+        $this->cupSize = $bot->callbackQuery()->data;
+
+        $bot->sendMessage('What flavors do you like?');
+        $this->next('recap');
     }
 
-    public function none(Nutgram $bot)
+    public function recap(Nutgram $bot)
     {
-        $bot->sendMessage('Bye!');
+        $flavors = $bot->message()->text;
+        $bot->sendMessage("You want an $this->cupSize cup with this flavors: $flavors");
         $this->end();
     }
 }
 
-$bot->onCommand('start', function (Nutgram $bot) {
-    Log::debug('start');
-    $conv = new ChooseColorMenu();
-     return $conv->start($bot);
-});
+$bot = new Nutgram($_ENV['TELEGRAM_TOKEN']);
+
+$bot->onCommand('start', AskIceCreamConversation::class);
+
+$bot->run();
