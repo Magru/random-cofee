@@ -14,15 +14,9 @@ use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardButton;
 |
 */
 
-$bot->onCommand('start', function (Nutgram $bot) {
+$bot = new Nutgram($_ENV['TOKEN']);
 
+$bot->onCommand('start', AskIceCreamConversation::class);
 
-    return $bot->menuText('Choose a color:')
-        ->addButtonRow(InlineKeyboardButton::make('Red', callback_data: 'red@handleColor'))
-        ->addButtonRow(InlineKeyboardButton::make('Green', callback_data: 'green@handleColor'))
-        ->addButtonRow(InlineKeyboardButton::make('Yellow', callback_data: 'yellow@handleColor'))
-        ->orNext('none')
-        ->showMenu();
+$bot->run();
 
-
-})->description('The start command!');
