@@ -5,7 +5,7 @@ use SergiX44\Nutgram\Nutgram;
 use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardButton;
 use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardMarkup;
 
-class AskIceCreamConversation extends Conversation {
+class BotTestController extends Conversation {
 
     public function start(Nutgram $bot)
     {
