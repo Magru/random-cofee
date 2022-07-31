@@ -46,5 +46,5 @@ $bot->onCommand('start', function (Nutgram $bot) {
 
     $conv = new ChooseColorMenu();
 
-     return $conv->start();
+     return $conv->start($bot);
 });
