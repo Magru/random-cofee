@@ -17,4 +17,6 @@ use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardButton;
 $bot->onCommand('start', function (Nutgram $bot) {
     $message = $bot->sendMessage('Hi!', ['chat_id' => 111222333]);
 
+    return $message;
+
 });
