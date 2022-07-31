@@ -14,9 +14,4 @@ use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardButton;
 |
 */
 
-$bot = new Nutgram($_ENV['TELEGRAM_TOKEN']);
-
-$bot->onCommand('start', AskIceCreamConversation::class);
-
-$bot->run();
-
+$bot->onCommand('start', AskIceCreamConversation::class)->description('The start command!');
