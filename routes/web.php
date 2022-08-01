@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AreaController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Log;
@@ -37,6 +38,12 @@ Route::middleware([
     Route::get('/user/store', [UserController::class, 'store'])->name('user.store');
 
     Route::get('/community/index', [CommunityController::class, 'index'])->name('community.index');
+
+    Route::get('/area/create', [AreaController::class, 'createStateOrCity'])->name('area.create');
+    Route::get('/area/index', [AreaController::class, 'areaList'])->name('area.index');
+
+    Route::post('/area/city/store', [AreaController::class, 'cityStore'])->name('area.city.store');
+    Route::post('/area/state/store', [AreaController::class, 'stateStore'])->name('area.state.store');
 
 });
 

@@ -21,6 +21,12 @@
                     <x-jet-nav-link href="{{ route('community.index') }}" :active="request()->routeIs('community.index')">
                         {{ __('Communities') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('area.index') }}" :active="request()->routeIs('area.index')">
+                        {{ __('Areas') }}
+                    </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('area.create') }}" :active="request()->routeIs('area.create')">
+                        {{ __('Create Area') }}
+                    </x-jet-nav-link>
                 </div>
             </div>
 
