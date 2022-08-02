@@ -7,6 +7,7 @@ use SergiX44\Nutgram\Conversations\Conversation;
 use SergiX44\Nutgram\Nutgram;
 use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardButton;
 use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardMarkup;
+use function Psy\debug;
 
 class TgRegistrationConversion extends Conversation {
 
@@ -16,6 +17,9 @@ class TgRegistrationConversion extends Conversation {
 
     public function askCupSize(Nutgram $bot)
     {
+
+        Log:debug(print_r($bot, true));
+
         $bot->sendMessage('How big should be you ice cream cup?', [
             'reply_markup' => InlineKeyboardMarkup::make()
                 ->addRow(InlineKeyboardButton::make('Small', callback_data: 'S'), InlineKeyboardButton::make('Medium', callback_data: 'M'))
