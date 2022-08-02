@@ -18,9 +18,9 @@ class TgRegistrationConversion extends Conversation {
     public function askCupSize(Nutgram $bot)
     {
 
-        Log:debug(print_r($bot, true));
+        $id = $bot->chatId();
 
-        $bot->sendMessage('How big should be you ice cream cup?', [
+        $bot->sendMessage('Hello ' . $id, [
             'reply_markup' => InlineKeyboardMarkup::make()
                 ->addRow(InlineKeyboardButton::make('Small', callback_data: 'S'), InlineKeyboardButton::make('Medium', callback_data: 'M'))
                 ->addRow(InlineKeyboardButton::make('Big', callback_data: 'L'), InlineKeyboardButton::make('Super Big', callback_data: 'XL')),
