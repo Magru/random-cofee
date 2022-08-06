@@ -30,9 +30,11 @@ class TgRegistrationConversion extends Conversation {
         if($user){
             $bot->sendMessage('Chat ID:' . $id);
         }else{
+
             $bot->sendMessage('Давайте знакомиться. Как вас зовут?');
             $this->_name = $bot->callbackQuery()->data;
             $bot->sendMessage('Привет, ' . $this->_name . ':)');
+            return;
             //$this->next('askState');
         }
 
