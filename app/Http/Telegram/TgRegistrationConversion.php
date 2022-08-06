@@ -19,14 +19,15 @@ class TgRegistrationConversion extends Conversation {
 
     public $_name;
     public $_username;
+    public $_chatId;
 
     public function startConversation(Nutgram $bot)
     {
 
-        $id = $bot->chatId();
-        $user = User::where('chat_id', $id)->first();
+        $this->_chatId = $bot->chatId();
+        $user = User::where('chat_id', $this->_chatId)->first();
         if($user){
-            $bot->sendMessage('Chat ID:' . $id);
+            $bot->sendMessage('Chat ID:' . $this->_chatId);
         }else{
             if($bot->user()){
                 $this->_username = $bot->user()->username;
@@ -44,6 +45,7 @@ class TgRegistrationConversion extends Conversation {
         $user->email = 'tg@tg.com';
         $user->tg_user_name = $this->_username;
         $user->password = Hash::make(Str::random(8));
+        $user->chat_id = $this->_chatId;
         $user->save();
 
         $bot->sendMessage('Привет, ' . $this->_name . 'ID: ' . $user->id );

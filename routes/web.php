@@ -36,6 +36,7 @@ Route::middleware([
     Route::get('/user/index', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
     Route::get('/user/store', [UserController::class, 'store'])->name('user.store');
+    Route::get('/user/destroy/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
     Route::get('/community/index', [CommunityController::class, 'index'])->name('community.index');
 
