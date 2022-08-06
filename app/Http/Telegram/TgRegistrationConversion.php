@@ -33,7 +33,7 @@ class TgRegistrationConversion extends Conversation {
             $bot->sendMessage('Давайте знакомиться. Как вас зовут?');
             $this->_name = $bot->callbackQuery()->data;
             $bot->sendMessage('Привет, ' . $this->_name . ':)');
-            $this->next('askState');
+            //$this->next('askState');
         }
 
 
