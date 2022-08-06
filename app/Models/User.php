@@ -65,4 +65,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Community::class);
     }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class, 'state_id');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
+    }
 }

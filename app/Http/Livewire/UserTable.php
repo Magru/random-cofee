@@ -25,6 +25,10 @@ class UserTable extends DataTableComponent
                 ->sortable(),
             Column::make("Chat ID", "chat_id")
                 ->sortable(),
+            Column::make("City", "city.name")
+                ->sortable(),
+            Column::make("State", "state.name")
+                ->sortable(),
             Column::make("Created at", "created_at")
                 ->sortable(),
             Column::make("Updated at", "updated_at")

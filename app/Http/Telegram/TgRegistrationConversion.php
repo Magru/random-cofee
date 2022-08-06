@@ -3,6 +3,8 @@
 namespace App\Http\Telegram;
 
 
+use App\Models\State;
+use App\Models\User;
 use SergiX44\Nutgram\Conversations\Conversation;
 use SergiX44\Nutgram\Nutgram;
 use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardButton;
@@ -11,22 +13,50 @@ use function Psy\debug;
 
 class TgRegistrationConversion extends Conversation {
 
-    protected ?string $step = 'askCupSize';
+    protected ?string $step = 'startConversation';
+
+    public $_name;
+    public $_state;
+    public $_city;
+
 
     public $cupSize;
 
-    public function askCupSize(Nutgram $bot)
+    public function startConversation(Nutgram $bot)
     {
 
         $id = $bot->chatId();
+        $user = User::where('chat_id', $id);
+        if($user){
+            $bot->sendMessage('Привет, ' . $user->name . ':)');
+        }else{
+            $bot->sendMessage('Давайте знакомиться. Как вас зовут?');
+            $this->_name = $bot->callbackQuery()->data;
+            $bot->sendMessage('Привет, ' . $this->_name . ':)');
+            $this->next('askState');
+        }
 
-        $bot->sendMessage('Hello ' . $id, [
+
+    }
+
+    public function askState(Nutgram $bot){
+
+        $states = State::all();
+
+
+        $bot->sendMessage('Из какого района вы? ', [
             'reply_markup' => InlineKeyboardMarkup::make()
                 ->addRow(InlineKeyboardButton::make('Small', callback_data: 'S'), InlineKeyboardButton::make('Medium', callback_data: 'M'))
                 ->addRow(InlineKeyboardButton::make('Big', callback_data: 'L'), InlineKeyboardButton::make('Super Big', callback_data: 'XL')),
         ]);
         $this->next('askFlavors');
     }
+
+    public function askCity(Nutgram $bot){
+
+    }
+
+
 
     public function askFlavors(Nutgram $bot)
     {
