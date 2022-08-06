@@ -28,7 +28,7 @@ class TgRegistrationConversion extends Conversation {
         $id = $bot->chatId();
         $user = User::where('chat_id', $id);
         if($user){
-            $bot->sendMessage('Привет, :)');
+            $bot->sendMessage('Chat ID:' . $id);
         }else{
             $bot->sendMessage('Давайте знакомиться. Как вас зовут?');
             $this->_name = $bot->callbackQuery()->data;
