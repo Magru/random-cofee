@@ -21,11 +21,12 @@ class TgRegistrationConversion extends Conversation {
     {
 
         $id = $bot->chatId();
+        $tgUserId = $bot->userId();
         $user = User::where('chat_id', $id)->first();
         if($user){
             $bot->sendMessage('Chat ID:' . $id);
         }else{
-            $bot->sendMessage('Давайте знакомиться. Как вас зовут?');
+            $bot->sendMessage('Ваш айди: '. $tgUserId .' Давайте знакомиться. Как вас зовут?');
             $this->next('askName');
         }
     }
