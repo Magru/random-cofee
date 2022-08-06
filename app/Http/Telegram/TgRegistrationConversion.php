@@ -32,10 +32,13 @@ class TgRegistrationConversion extends Conversation {
         }else{
 
             $bot->sendMessage('Давайте знакомиться. Как вас зовут?');
-            $this->_name = $bot->message()->text;
-            $bot->sendMessage('Привет, ' . $this->_name . ':)');
-            //$this->next('askState');
+            //$bot->sendMessage('Привет, ' . $this->_name . ':)');
+            $this->next('askName');
         }
+    }
+
+    public function askName(Nutgram $bot){
+        $this->_name = $bot->message()->text;
     }
 
     public function askState(Nutgram $bot){
