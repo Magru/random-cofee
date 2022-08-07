@@ -36,7 +36,7 @@ class UserTable extends DataTableComponent
                     ];
                 })
                 ->buttons([
-                    LinkColumn::make('Delete')->title(fn($row) => 'Edit ' . $row->name)
+                    LinkColumn::make('Delete')->title(fn($row) => 'Delete ')
                         ->location(fn($row) => route('user.destroy', $row))->attributes(function($row) {
                             return [
                                 'class' => 'underline text-blue-500 hover:no-underline',
