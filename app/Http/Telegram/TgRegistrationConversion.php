@@ -13,7 +13,8 @@ use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardButton;
 use SergiX44\Nutgram\Telegram\Types\Keyboard\InlineKeyboardMarkup;
 use function Psy\debug;
 
-class TgRegistrationConversion extends Conversation {
+class TgRegistrationConversion extends Conversation
+{
 
     protected ?string $step = 'startConversation';
 
@@ -26,10 +27,11 @@ class TgRegistrationConversion extends Conversation {
 
         $this->_chatId = $bot->chatId();
         $user = User::where('chat_id', $this->_chatId)->first();
-        if($user){
+        if ($user) {
+            $this->next('askState');
             $bot->sendMessage('Chat ID:' . $this->_chatId);
-        }else{
-            if($bot->user()){
+        } else {
+            if ($bot->user()) {
                 $this->_username = $bot->user()->username;
             }
             $bot->sendMessage('Давайте знакомиться. Как вас зовут?');
@@ -37,7 +39,8 @@ class TgRegistrationConversion extends Conversation {
         }
     }
 
-    public function askName(Nutgram $bot){
+    public function askName(Nutgram $bot)
+    {
         $this->_name = $bot->message()->text;
 
         $user = new User();
@@ -48,9 +51,26 @@ class TgRegistrationConversion extends Conversation {
         $user->chat_id = $this->_chatId;
         $user->save();
 
-        $bot->sendMessage('Привет, ' . $this->_name . 'ID: ' . $user->id );
+        $bot->sendMessage('Привет, ' . $this->_name . 'ID: ' . $user->id);
 
 
+    }
+
+    public function askState(Nutgram $bot)
+    {
+
+        $states = State::all();
+        $keyboardMarkup = InlineKeyboardMarkup::make();
+        if($states){
+            foreach ($states as $_s){
+                $keyboardMarkup->addRow(InlineKeyboardButton::make($_s->name, callback_data: $_s->id));
+            }
+        }
+
+
+        $bot->sendMessage('How big should be you ice cream cup?', [
+            'reply_markup' => $keyboardMarkup
+        ]);
     }
 
 }
