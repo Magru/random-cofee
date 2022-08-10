@@ -78,7 +78,7 @@ class TgRegistrationConversion extends Conversation
     public function askState(Nutgram $bot)
     {
         $this->_state = $bot->callbackQuery()->data;
-        $this->_user->state_id = $this->_state;
+        $this->_user->state->fill($this->_state);
         $this->_user->save();
         $bot->sendMessage('State: ' . $this->_state);
     }
