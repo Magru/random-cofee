@@ -35,6 +35,7 @@ class TgRegistrationConversion extends Conversation
         }
         $bot->sendMessage('Привет!');
         if ($user) {
+            $this->_user = $user;
             if(!$user->state()->exists()){
                 $states = State::all();
                 $inlineKeyboard = InlineKeyboardMarkup::make();
