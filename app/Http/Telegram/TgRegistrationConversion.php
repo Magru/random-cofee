@@ -29,7 +29,7 @@ class TgRegistrationConversion extends Conversation
         $user = User::where('chat_id', $this->_chatId)->first();
         if ($user) {
             $this->next('askState');
-            $bot->sendMessage('Chat ID:' . $this->_chatId);
+            //$bot->sendMessage('Chat ID:' . $this->_chatId);
         } else {
             if ($bot->user()) {
                 $this->_username = $bot->user()->username;
