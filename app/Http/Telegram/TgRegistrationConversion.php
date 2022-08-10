@@ -42,17 +42,18 @@ class TgRegistrationConversion extends Conversation
 
     public function askName(Nutgram $bot)
     {
-        $this->_name = $bot->message()->text;
-
-        $user = new User();
-        $user->name = $this->_name;
-        $user->email = 'tg@tg.com';
-        $user->tg_user_name = $this->_username;
-        $user->password = Hash::make(Str::random(8));
-        $user->chat_id = $this->_chatId;
-        $user->save();
-
-        $bot->sendMessage('Привет, ' . $this->_name . 'ID: ' . $user->id);
+        $bot->sendMessage('askName');
+//        $this->_name = $bot->message()->text;
+//
+//        $user = new User();
+//        $user->name = $this->_name;
+//        $user->email = 'tg@tg.com';
+//        $user->tg_user_name = $this->_username;
+//        $user->password = Hash::make(Str::random(8));
+//        $user->chat_id = $this->_chatId;
+//        $user->save();
+//
+//        $bot->sendMessage('Привет, ' . $this->_name . 'ID: ' . $user->id);
 
 
     }
@@ -60,9 +61,9 @@ class TgRegistrationConversion extends Conversation
     public function askState(Nutgram $bot)
     {
 
-        $this->_state = $bot->callbackQuery()->data;
+        //$this->_state = $bot->callbackQuery()->data;
 
-        $bot->sendMessage('Your state' . $this->_state);
+        $bot->sendMessage('askState');
     }
 
 }
