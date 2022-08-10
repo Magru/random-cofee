@@ -28,32 +28,14 @@ class TgRegistrationConversion extends Conversation
 
         $this->_chatId = $bot->chatId();
         $user = User::where('chat_id', $this->_chatId)->first();
+        if ($bot->user()) {
+            $this->_username = $bot->user()->username;
+        }
+        $bot->sendMessage('Привет');
         if ($user) {
+            $this->next('askState');
 
-            if(!$user->state()){
-                $states = State::all();
-                $keyboardMarkup = InlineKeyboardMarkup::make();
-                if($states){
-                    foreach ($states as $_s){
-                        $keyboardMarkup->addRow(InlineKeyboardButton::make($_s->name, callback_data: $_s->id));
-                    }
-                }
-
-
-                $bot->sendMessage('How big should be you ice cream cup?', [
-                    'reply_markup' => $keyboardMarkup
-                ]);
-
-                $this->next('askState');
-            }
-
-
-            //$bot->sendMessage('Chat ID:' . $this->_chatId);
         } else {
-            if ($bot->user()) {
-                $this->_username = $bot->user()->username;
-            }
-            $bot->sendMessage('Давайте знакомиться. Как вас зовут?');
             $this->next('askName');
         }
     }
