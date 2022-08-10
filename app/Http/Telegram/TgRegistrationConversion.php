@@ -6,6 +6,7 @@ namespace App\Http\Telegram;
 use App\Models\State;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use SergiX44\Nutgram\Conversations\Conversation;
 use SergiX44\Nutgram\Nutgram;
@@ -32,7 +33,8 @@ class TgRegistrationConversion extends Conversation
         if ($bot->user()) {
             $this->_username = $bot->user()->username;
         }
-        $bot->sendMessage('Привет ' . $user->state()->exists());
+        $bot->sendMessage('Привет ');
+        Log::debug(print_r($user->state()->exists()), true);
         if ($user) {
             if(!$user->state()){
                 $states = State::all();
