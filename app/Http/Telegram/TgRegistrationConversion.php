@@ -21,6 +21,7 @@ class TgRegistrationConversion extends Conversation
     public $_name;
     public $_username;
     public $_chatId;
+    public $_state;
 
     public function startConversation(Nutgram $bot)
     {
@@ -29,19 +30,22 @@ class TgRegistrationConversion extends Conversation
         $user = User::where('chat_id', $this->_chatId)->first();
         if ($user) {
 
-
-            $states = State::all();
-            $keyboardMarkup = InlineKeyboardMarkup::make();
-            if($states){
-                foreach ($states as $_s){
-                    $keyboardMarkup->addRow(InlineKeyboardButton::make($_s->name, callback_data: $_s->id));
+            if(!$user->state()){
+                $states = State::all();
+                $keyboardMarkup = InlineKeyboardMarkup::make();
+                if($states){
+                    foreach ($states as $_s){
+                        $keyboardMarkup->addRow(InlineKeyboardButton::make($_s->name, callback_data: $_s->id));
+                    }
                 }
+
+
+                $bot->sendMessage('How big should be you ice cream cup?', [
+                    'reply_markup' => $keyboardMarkup
+                ]);
+
+                $this->next('askState');
             }
-
-
-            $bot->sendMessage('How big should be you ice cream cup?', [
-                'reply_markup' => $keyboardMarkup
-            ]);
 
 
             //$bot->sendMessage('Chat ID:' . $this->_chatId);
@@ -74,19 +78,9 @@ class TgRegistrationConversion extends Conversation
     public function askState(Nutgram $bot)
     {
 
-        $states = State::all();
-        $keyboardMarkup = InlineKeyboardMarkup::make();
-        if($states){
-            foreach ($states as $_s){
-                $keyboardMarkup->addRow(InlineKeyboardButton::make($_s->name, callback_data: $_s->id));
-            }
-        }
+        $this->_state = $bot->callbackQuery()->data;
 
-
-        $bot->sendMessage('How big should be you ice cream cup?', [
-            'reply_markup' => $keyboardMarkup
-        ]);
-        $this->end();
+        $bot->sendMessage('Your state' . $this->_state);
     }
 
 }
