@@ -33,37 +33,45 @@ class TgRegistrationConversion extends Conversation
         }
         $bot->sendMessage('Привет');
         if ($user) {
+            $states = State::all();
+            $inlineKeyboard = InlineKeyboardMarkup::make();
+            if($states){
+                foreach ($states as $_state){
+                    $inlineKeyboard->addRow(InlineKeyboardButton::make($_state->name, callback_data: $_state->id));
+                }
+            }
+            $bot->sendMessage('How big should be you ice cream cup?', [
+                'reply_markup' => $inlineKeyboard
+            ]);
             $this->next('askState');
-
         } else {
+            $bot->sendMessage('Привет. Как вас зовут ?');
             $this->next('askName');
         }
     }
 
     public function askName(Nutgram $bot)
     {
-        $bot->sendMessage('askName');
-//        $this->_name = $bot->message()->text;
-//
-//        $user = new User();
-//        $user->name = $this->_name;
-//        $user->email = 'tg@tg.com';
-//        $user->tg_user_name = $this->_username;
-//        $user->password = Hash::make(Str::random(8));
-//        $user->chat_id = $this->_chatId;
-//        $user->save();
-//
-//        $bot->sendMessage('Привет, ' . $this->_name . 'ID: ' . $user->id);
+
+        $this->_name = $bot->message()->text;
+
+        $user = new User();
+        $user->name = $this->_name;
+        $user->email = 'tg@tg.com';
+        $user->tg_user_name = $this->_username;
+        $user->password = Hash::make(Str::random(8));
+        $user->chat_id = $this->_chatId;
+        $user->save();
+
+        $bot->sendMessage('Привет, ' . $this->_name . 'ID: ' . $user->id);
 
 
     }
 
     public function askState(Nutgram $bot)
     {
-
-        //$this->_state = $bot->callbackQuery()->data;
-
-        $bot->sendMessage('askState');
+        $this->_state = $bot->callbackQuery()->data;
+        $bot->sendMessage('State: ' . $this->_state);
     }
 
 }
