@@ -3,6 +3,7 @@
 namespace App\Http\Telegram;
 
 
+use App\Models\City;
 use App\Models\State;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -24,6 +25,7 @@ class TgRegistrationConversion extends Conversation
     public $_chatId;
     public $_state;
     public $_user;
+    public $_city;
 
     public function startConversation(Nutgram $bot)
     {
@@ -80,7 +82,29 @@ class TgRegistrationConversion extends Conversation
         $this->_state = $bot->callbackQuery()->data;
         $this->_user->state->fill($this->_state);
         $this->_user->save();
-        $bot->sendMessage('State: ' . $this->_state);
+
+        $cities = City::where('state_id', $this->_state)->get();
+        $inlineKeyboard = InlineKeyboardMarkup::make();
+        if($cities){
+            foreach ($cities as $_city){
+                $inlineKeyboard->addRow(InlineKeyboardButton::make($_city->name, callback_data: $_city->id));
+            }
+        }
+        $bot->sendMessage('Из какого города вы ?', [
+            'reply_markup' => $inlineKeyboard
+        ]);
+        $this->next('askCity');
+
+    }
+
+    public function askCity(Nutgram $bot)
+    {
+        $this->_city = $bot->callbackQuery()->data;
+        $this->_user->city->fill($this->_city);
+        $this->_user->save();
+
+        $this->end();
+
     }
 
 }
