@@ -32,7 +32,7 @@ class TgRegistrationConversion extends Conversation
         if ($bot->user()) {
             $this->_username = $bot->user()->username;
         }
-        $bot->sendMessage('Привет ' . $user->state());
+        $bot->sendMessage('Привет ' . $user->state()->exists());
         if ($user) {
             if(!$user->state()){
                 $states = State::all();
