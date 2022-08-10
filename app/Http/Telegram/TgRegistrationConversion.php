@@ -71,6 +71,7 @@ class TgRegistrationConversion extends Conversation
         $bot->sendMessage('How big should be you ice cream cup?', [
             'reply_markup' => $keyboardMarkup
         ]);
+        $this->end();
     }
 
 }
