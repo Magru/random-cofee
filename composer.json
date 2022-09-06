@@ -15,6 +15,7 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.5",
         "nutgram/nutgram": "^3.5",
+        "opcodesio/log-viewer": "^1.2",
         "rappasoft/laravel-livewire-tables": "^2.8",
         "spatie/laravel-permission": "^5.5"
     },
