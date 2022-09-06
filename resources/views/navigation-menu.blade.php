@@ -27,6 +27,9 @@
                     <x-jet-nav-link href="{{ route('area.create') }}" :active="request()->routeIs('area.create')">
                         {{ __('Create Area') }}
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="/log-viewer" :active="request()->routeIs('area.create')">
+                        Logs
+                    </x-jet-nav-link>
                 </div>
             </div>
 
